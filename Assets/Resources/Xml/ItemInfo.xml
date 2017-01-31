@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ItemInfo>
+	<Item Id = "001">
+		<Name>MiniGun</Name>
+		<Type>Weapon</Type>
+		<Rare>Blue</Rare>
+		<Info1>Shoot More Bullet !</Info1>
+		<Info2>ATK - 5 AR + 2</Info2>
+	</Item>
+	<Item Id = "002">
+		<Name>SpeedRunner</Name>
+		<Type>Buff</Type>
+		<Rare>Green</Rare>
+		<Info1>增加移动速度</Info1>
+		<Info2>Speed * 150%</Info2>
+	</Item>
+</ItemInfo>

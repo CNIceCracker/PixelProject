@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CraftTable>
+	<way id = "001">
+		<first>WoodElement</first>
+		<second>IronElement</second>
+		<third>SiliconElement</third>
+		<result>ChemicalElement</result>
+	</way>
+	<way id = "002">
+		<first>WoodElement</first>
+		<second>WoodElement</second>
+		<third>WoodElement</third>
+		<result>IronElement</result>
+	</way>
+</CraftTable>
