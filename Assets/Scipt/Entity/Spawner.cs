@@ -45,10 +45,14 @@ public class Spawner : MonoBehaviour {
 				yield return new WaitForSeconds(1.0f);
 				GameObject enemy = Instantiate(Resources.Load("Enemy/" + enemyName[num]),transform.position,transform.rotation) as GameObject;
 				enemy.GetComponent<Enemy>().target = transform.position + new Vector3(Random.Range(-10,10),0,0);
+				enemy.GetComponent<Enemy>().Died += delegate {
+					curNum--;
+				};
 				curNum++;
 				anim.SetBool("IsOpen",false);
 				break;
 			}
 		}
 	}
+
 }

@@ -869,7 +869,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  interval: 5
+  interval: 2
   stopSpawnDistance: 10
   isSpawning: 0
 --- !u!1 &270854325 stripped
@@ -887,6 +887,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d59da2aa156349b870cf94f031feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  armor: 0
+  attack: 0
+  weapons: []
+  weaponIndex: 0
   visualField: 20
   attackRange: 15
   target: {x: 0, y: 0, z: 0}
@@ -1721,7 +1726,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 3, y: -44779.5}
+  m_AnchoredPosition: {x: 3, y: -47419.5}
   m_SizeDelta: {x: 200, y: 800}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &639194313
@@ -2079,6 +2084,9 @@ MonoBehaviour:
   accurate: 30
   magazineSize: 0
   reloadTime: 0
+  maxAmmo: 0
+  critChance: 0
+  critMultiplier: 0
 --- !u!212 &900258016
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2378,6 +2386,9 @@ MonoBehaviour:
   accurate: 50
   magazineSize: 30
   reloadTime: 1
+  maxAmmo: 100
+  critChance: .5
+  critMultiplier: 2
 --- !u!212 &954857593
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3174,53 +3185,69 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 401096, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 482162, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_LocalPosition.x
       value: -4.01000023
       objectReference: {fileID: 0}
-    - target: {fileID: 401096, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 482162, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_LocalPosition.y
       value: 7.57000017
       objectReference: {fileID: 0}
-    - target: {fileID: 401096, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 482162, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 401096, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 482162, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 401096, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 482162, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 401096, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 482162, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 401096, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 482162, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 401096, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 482162, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 129484, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+    - target: {fileID: 115366, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5001070, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
-      propertyPath: m_Constraints
-      value: 4
+    - target: {fileID: 11436926, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+      propertyPath: magazineSize
+      value: 60
       objectReference: {fileID: 0}
-    - target: {fileID: 129484, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
-      propertyPath: m_Layer
+    - target: {fileID: 11436926, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+      propertyPath: attackFix
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11436926, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+      propertyPath: attackRate
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 21214216, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
-      propertyPath: m_SortingLayerID
-      value: -1566280877
+    - target: {fileID: 11436926, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 154918, guid: ffcae0a33c43f7c4b96730bcd342ebbd, type: 2}
+    - target: {fileID: 11436926, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+      propertyPath: reloadTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11436926, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+      propertyPath: maxAmmo
+      value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485834, guid: c705193f7a5c495468cec20a26634eb1, type: 2}
+      propertyPath: attackRange
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c705193f7a5c495468cec20a26634eb1, type: 2}

@@ -22,6 +22,7 @@ public class Fightable : Hurtable {
 		weapons[weaponIndex].Attack(newMessage);
 	}
 
+
 	public void SwitchWeapon(int way){
 		UnloadWeapon(weapons[weaponIndex]);
 		
@@ -39,6 +40,4 @@ public class Fightable : Hurtable {
 	private void UnloadWeapon(Weapon weapon){
 		weapon.gameObject.SetActive(false);
 	}
-
-
 }
