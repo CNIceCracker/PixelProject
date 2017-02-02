@@ -15,8 +15,10 @@ public class GunController : MonoBehaviour{
 	}
 
 	public void CreateOneBullet(Transform firePoint,GameObject bullet,float attack,float attackRange,float accurate,Vector3 target,bool isPlayer){
-		GameObject bulletObj = Instantiate(bullet,firePoint.position,firePoint.rotation) as GameObject;
-		//bulletObj.transform.localScale = transform.localScale;
+		//GameObject bulletObj = Instantiate(bullet,firePoint.position,firePoint.rotation) as GameObject;
+		GameObject bulletObj = ObjectPoolMgr.instance.Alloc(bullet);
+		bulletObj.transform.SetParent(null);
+		bulletObj.transform.position = firePoint.position;
 		Bullet bulletComp = bulletObj.GetComponent<Bullet>();
 		bulletComp.attack = attack;
 		bulletComp.range = attackRange;
