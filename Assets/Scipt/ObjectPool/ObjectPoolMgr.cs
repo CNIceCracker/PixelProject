@@ -8,13 +8,13 @@ public class ObjectPoolMgr : MonoBehaviour {
 	private Dictionary<string, ObjectPool> poolDic = new Dictionary<string, ObjectPool>();
 	protected bool _binit = false;				//是否已经初始化
 	//储存一些初始化信息
-	public List<AllocSize> objectPoolList = new List<AllocSize>(5);
+	public List<AllocSize> objectPoolList = new List<AllocSize>();
 	[System.Serializable]
 	public class AllocSize{
 		public int preAllocSize;
 		public int autoIncreaseSize;
 		public GameObject prefeb;
-	}
+	};
 
 	void Awake () {
 		if (instance == null)
@@ -38,10 +38,12 @@ public class ObjectPoolMgr : MonoBehaviour {
 			GameObject subPool = new GameObject(poolNameString);
 			subPool.transform.parent = this.transform;
 			//根据poolNameString 找到对应的对象池类,并添加到对象池GameObject上
+			ObjectPool newPool;
 			System.Type poolType = System.Type.GetType(poolNameString);
-			ObjectPool newPool = (ObjectPool)subPool.AddComponent(poolType);
-			//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
-			if(!newPool){
+			if(poolType != null){
+				newPool = (ObjectPool)subPool.AddComponent(poolType);
+			}else{
+				//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
 				newPool = subPool.AddComponent<CommonPool>() as ObjectPool;
 			}
 			//传一些参数到新创建的对象池中
@@ -49,6 +51,7 @@ public class ObjectPoolMgr : MonoBehaviour {
 			newPool.prefab = pool.prefeb;
 			newPool.preAllocCount = pool.preAllocSize;
 			newPool.autoIncreaseCount = pool.autoIncreaseSize;
+			newPool.Alloc(-1);
 			poolDic.Add(poolNameString,newPool);
 		}
 	}
@@ -80,10 +83,13 @@ public class ObjectPoolMgr : MonoBehaviour {
 			newPool.transform.parent = this.transform;
 			//根据poolNameString 找到对应的对象池类,并添加到对象池GameObject上
 			System.Type poolType = System.Type.GetType(poolNameString);
-			subPool = (ObjectPool)newPool.AddComponent(poolType);
-			if(subPool == null)
-			//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
-			subPool = newPool.AddComponent<CommonPool>() as ObjectPool;
+			if(poolType != null){
+				subPool = (ObjectPool)newPool.AddComponent(poolType);
+			}else{
+				//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
+				subPool = newPool.AddComponent<CommonPool>() as ObjectPool;
+			}
+
 			//传一些参数到新创建的对象池中
 			subPool.objTypeString = obj.name;
 			subPool.prefab = obj;

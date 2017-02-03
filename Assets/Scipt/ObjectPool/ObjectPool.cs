@@ -13,14 +13,16 @@ public class ObjectPool : MonoBehaviour {
 	public GameObject prefab;					//prefab引用
 	[HideInInspector]
 	public string objTypeString;				//池中对象描述字符串
+	
 
-	protected void AddPrefab(int num){
+	protected virtual void AddPrefab(int num){
 		for(int i = 0;i < num; i++){	//初始化多个对象
 			GameObject obj = Instantiate(prefab , new Vector3(0,0,0), Quaternion.identity) as GameObject;
 			obj.SetActive(false);//防止挂在returnObj上的脚本自动开始执行
 			obj.transform.parent = this.transform;
 			queue.Enqueue(obj);
 		}
+		_freeObjCount+=num;
 	}
 
 	public virtual GameObject Alloc(float lifetime){
@@ -57,14 +59,11 @@ public class ObjectPool : MonoBehaviour {
 			Debug.LogWarning("the obj " + obj.name + " be recycle twice!" );
 			return;
 		}
-		if( _freeObjCount > preAllocCount + autoIncreaseCount ){
-			Destroy(obj);//当前池中object数量已满，直接销毁
-		}else{
-			queue.Enqueue(obj);//入队，并进行reset
-			obj.transform.parent = this.transform;
-			obj.SetActive(false);
-			_freeObjCount++;
-		}
+		queue.Enqueue(obj);//入队，并进行reset
+		obj.transform.parent = this.transform;
+		obj.transform.position = Vector3.zero;
+		obj.SetActive(false);
+		_freeObjCount++;
 	}
 
 }
