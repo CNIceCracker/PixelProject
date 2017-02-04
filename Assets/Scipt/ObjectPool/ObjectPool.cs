@@ -50,6 +50,7 @@ public class ObjectPool : MonoBehaviour {
 		}
 		info.types = objTypeString;
 		returnObj.SetActive(true);
+		returnObj.transform.SetParent(null);
 		return returnObj;
 	}
 	

@@ -18,7 +18,7 @@ public class Enemy : Fightable {
 		{
 			handler(this, null);
 			yield return new WaitForSeconds(1f);
-			Destroy(gameObject);
+			ObjectPoolMgr.instance.Recycle(this.gameObject);
 		}
 	}
 }

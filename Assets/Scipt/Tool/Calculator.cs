@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Calculator{
 	/// <summary>
@@ -21,8 +22,12 @@ public class Calculator{
 	/// <returns>The damage.</returns>
 	/// <param name="attack">Attack.</param>
 	/// <param name="armor">Armor.</param>
-	public static float GetDamage(float attack,float armor){
-		return attack * (100-armor)/100;
+	public static float GetDamage(List<DamageData> damages,float damageReduction){
+		float allDamage = 0f;
+		foreach(DamageData damage in damages){
+			allDamage += damage.value;
+		}
+		return allDamage;
 	}
 
 	public static bool BeDamaged(Transform target, Damage damage){

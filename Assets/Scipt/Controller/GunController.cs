@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GunController : MonoBehaviour{
 
@@ -14,13 +15,14 @@ public class GunController : MonoBehaviour{
 		DontDestroyOnLoad (gameObject);
 	}
 
-	public void CreateOneBullet(Transform firePoint,GameObject bullet,float attack,float attackRange,float accurate,Vector3 target,bool isPlayer){
+	public void CreateOneBullet(Vector3 target,Transform firePoint,GameObject bullet,List<DamageData> damages,
+	                            float attackRange,float accurate,bool isPlayer){
 		//GameObject bulletObj = Instantiate(bullet,firePoint.position,firePoint.rotation) as GameObject;
 		GameObject bulletObj = ObjectPoolMgr.instance.Alloc(bullet);
 		bulletObj.transform.SetParent(null);
 		bulletObj.transform.position = firePoint.position;
 		Bullet bulletComp = bulletObj.GetComponent<Bullet>();
-		bulletComp.attack = attack;
+		bulletComp.damages = damages;
 		bulletComp.range = attackRange;
 		bulletComp.isPlayerAttack = isPlayer;
 		bulletComp.targetWay = Calculator.GetBulletTarget(target,bulletObj.transform.position,accurate);

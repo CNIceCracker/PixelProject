@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class TestGun : MonoBehaviour {
-	public float attackFix;		//攻击补正
+	/*public float attackFix;		//攻击补正
 	public float attackRate;	//每秒攻击频率
 	public float attackRange;	//攻击距离
 	public GameObject bullet; 	//发射的子弹
@@ -31,10 +31,10 @@ public class TestGun : MonoBehaviour {
 			Vector3 target = (Vector3)message[1];
 			bool isPlayer = (bool)message[2];
 
-			GunController.instance.CreateOneBullet(transform,bullet,attack,attackRange,accurate,target,isPlayer);
+			GunController.instance.CreateOneBullet(target,transform,bullet,attack,attackRange,accurate,isPlayer);
 			canAttact = false;
 			attactTimer = 0f;
 		}
 
-	}
+	}*/
 }

@@ -23,7 +23,7 @@ public class Bullet : Damage {
 	void OnTriggerEnter2D(Collider2D other){ 
 		Hurtable target;
 		if((target = other.gameObject.GetComponent<Hurtable>()) != null){
-			target.BeAttacked(attack);
+			target.BeAttacked(damages);
 		}
 		ObjectPoolMgr.instance.Recycle(this.gameObject);
 	}

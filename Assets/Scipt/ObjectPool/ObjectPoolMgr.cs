@@ -56,6 +56,32 @@ public class ObjectPoolMgr : MonoBehaviour {
 		}
 	}
 
+	protected ObjectPool CreatePool(string objName,GameObject prefab,int preAllocCount = 5,int autoIncreaseCount = 5){
+		string poolNameString = objName + "Pool"; //拼出对象池名字
+
+		//生成type类型对象池的GameObject,它挂在ObjectPoolMgr层次下
+		GameObject newPool = new GameObject(poolNameString);
+		newPool.transform.parent = this.transform;
+
+		ObjectPool subPool = null;
+		//根据poolNameString 找到对应的对象池类,并添加到对象池GameObject上
+		System.Type poolType = System.Type.GetType(poolNameString);
+		if(poolType != null){
+			subPool = (ObjectPool)newPool.AddComponent(poolType);
+		}else{
+			//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
+			subPool = newPool.AddComponent<CommonPool>() as ObjectPool;
+		}
+
+		//传一些参数到新创建的对象池中
+		subPool.objTypeString = objName;
+		subPool.prefab = prefab;
+		subPool.preAllocCount = preAllocCount;
+		subPool.autoIncreaseCount = autoIncreaseCount;
+		poolDic.Add(poolNameString,subPool);
+		return subPool;
+	}
+
 	//两种方法取出，一种用名称，一种用GameObject类型的参数，后者可以无中生有，前者只能从已经存在的对象池中取
 
 	public GameObject Alloc(string type, float lifetime = 0){
@@ -78,25 +104,7 @@ public class ObjectPoolMgr : MonoBehaviour {
 		if(poolDic.TryGetValue(poolNameString,out subPool)){ //如果字典中已经有这种对象池
 			return subPool.Alloc(lifetime);
 		}else{//否则新创一个
-			//生成type类型对象池的GameObject,它挂在ObjectPoolMgr层次下
-			GameObject newPool = new GameObject(poolNameString);
-			newPool.transform.parent = this.transform;
-			//根据poolNameString 找到对应的对象池类,并添加到对象池GameObject上
-			System.Type poolType = System.Type.GetType(poolNameString);
-			if(poolType != null){
-				subPool = (ObjectPool)newPool.AddComponent(poolType);
-			}else{
-				//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
-				subPool = newPool.AddComponent<CommonPool>() as ObjectPool;
-			}
-
-			//传一些参数到新创建的对象池中
-			subPool.objTypeString = obj.name;
-			subPool.prefab = obj;
-			subPool.preAllocCount = 5;
-			subPool.autoIncreaseCount = 5;
-			poolDic.Add(poolNameString,subPool);
-			return subPool.Alloc(lifetime);
+			return CreatePool(obj.name,obj).Alloc(lifetime);
 		}
 	}
 	
@@ -107,8 +115,9 @@ public class ObjectPoolMgr : MonoBehaviour {
 			//往池中放入对象
 			subPool.Recycle(recycleObj);
 		}else{
-			Debug.LogError("Fail to Recycle" + recycleObj.name);
+			//如果找不到这个池,就新开一个
+			CreatePool(recycleObj.name,recycleObj).Recycle(recycleObj);
 		}
-
 	}
+
 }
