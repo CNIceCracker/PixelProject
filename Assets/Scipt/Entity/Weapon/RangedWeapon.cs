@@ -9,7 +9,7 @@ public class RangedWeapon : Weapon {
 	public float accurate;		//精准性
 	public float fireRate;		//每秒攻击频率
 	public int magazineSize;	//弹夹容量
-	public int maxAmmo;			//子弹总数
+	public int maxAmmo;			//子弹上限
 	public float reloadTime;	//填装时间
 
 	public float critChance = 0.05f;	//暴击率
@@ -90,4 +90,11 @@ public class RangedWeapon : Weapon {
 			}
 		}
 	}
+
+    public void GetAmmoInfo( ref int curAmmo,ref int curMagazine)
+    {
+        curAmmo = this.curAmmo;
+        curMagazine = this.curMagazine;
+    }
+    
 }

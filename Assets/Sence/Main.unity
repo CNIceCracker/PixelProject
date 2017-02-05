@@ -1291,6 +1291,7 @@ GameObject:
   - 114: {fileID: 508432187}
   - 114: {fileID: 508432180}
   - 114: {fileID: 508432179}
+  - 114: {fileID: 508432184}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1377,6 +1378,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &508432184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 508432178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6efe823977691438adff7aeac0e542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 20
+  height: 20
+  curAmmo: 0
+  curMagazine: 0
 --- !u!4 &508432185
 Transform:
   m_ObjectHideFlags: 0
@@ -1550,7 +1566,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 3, y: -50599.5}
+  m_AnchoredPosition: {x: 3, y: -52399.5}
   m_SizeDelta: {x: 200, y: 800}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &639194313
