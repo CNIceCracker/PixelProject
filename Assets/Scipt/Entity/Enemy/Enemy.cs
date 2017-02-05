@@ -3,6 +3,8 @@ using System.Collections;
 using System;
 
 public class Enemy : Fightable {
+	public EnemyNameData enemyName;
+	public int level;
 	public float visualField;
 	public float attackRange;
 	public Vector3 target;

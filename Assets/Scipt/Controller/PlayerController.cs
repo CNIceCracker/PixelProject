@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour {
 			player.GetComponent<Animator>().SetBool("IsRun",true);
 			
 		}
-		if(Input.GetKeyUp(KeyCode.LeftShift)){
+		if(Input.GetKeyUp(KeyCode.LeftShift) || !Input.GetKey(KeyCode.LeftShift)){
 			player.GetComponent<Animator>().SetBool("IsRun",false);
 		}
 	}

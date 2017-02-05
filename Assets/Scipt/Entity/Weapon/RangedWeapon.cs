@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class RangedWeapon : Weapon {
-	
-
 	public float attackRange;	//攻击距离
 
 	public GameObject bullet; 	//发射的子弹

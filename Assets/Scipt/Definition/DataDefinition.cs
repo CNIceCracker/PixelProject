@@ -11,3 +11,19 @@ public class DamageData {
 		this.value = value;
 	}
 }
+
+[System.Serializable]
+public class EnemyNameData{
+	public string enemyType;
+	public string prefix;
+
+
+	public EnemyNameData(string enmeyType,string prefix = null){
+		this.enemyType = enmeyType;
+		this.prefix = prefix;
+	}
+
+	public string GetFullName(){
+		return  prefix+ " " + enemyType;
+	}
+}

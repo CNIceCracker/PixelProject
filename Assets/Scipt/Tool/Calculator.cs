@@ -30,6 +30,12 @@ public class Calculator{
 		return allDamage;
 	}
 
+	/// <summary>
+	/// 计算目标是否会被击中
+	/// </summary>
+	/// <returns><c>true</c>, if damaged was been, <c>false</c> otherwise.</returns>
+	/// <param name="target">Target.</param>
+	/// <param name="damage">Damage.</param>
 	public static bool BeDamaged(Transform target, Damage damage){
 		if(target.tag == "Player"){
 			if(!damage.isPlayerAttack){
