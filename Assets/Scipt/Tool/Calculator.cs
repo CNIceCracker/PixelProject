@@ -27,6 +27,7 @@ public class Calculator{
 		foreach(DamageData damage in damages){
 			allDamage += damage.value;
 		}
+		allDamage *= damageReduction;
 		return allDamage;
 	}
 

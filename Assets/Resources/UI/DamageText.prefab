@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 422880}
   - 114: {fileID: 11433116}
   m_Layer: 5
-  m_Name: damageText
+  m_Name: DamageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
