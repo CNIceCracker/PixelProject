@@ -14,7 +14,7 @@ public class Bullet : Damage {
 		range -= speed * Time.deltaTime;
 		if(range < 0)
 		{
-			Destroy(gameObject);
+			ObjectPoolMgr.instance.Recycle(this.gameObject);
 		}
 
 		transform.Translate(targetWay * speed * Time.deltaTime, Space.World);
@@ -23,9 +23,9 @@ public class Bullet : Damage {
 	void OnTriggerEnter2D(Collider2D other){ 
 		Hurtable target;
 		if((target = other.gameObject.GetComponent<Hurtable>()) != null){
-			target.BeAttacked(attack);
+			target.BeAttacked(damages);
 		}
-		Destroy(gameObject);
+		ObjectPoolMgr.instance.Recycle(this.gameObject);
 	}
 
 }

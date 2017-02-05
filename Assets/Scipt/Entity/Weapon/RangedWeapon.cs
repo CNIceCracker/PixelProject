@@ -3,14 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class RangedWeapon : Weapon {
+	
+
+	public float attackRange;	//攻击距离
 
 	public GameObject bullet; 	//发射的子弹
 	public float accurate;		//精准性
+	public float fireRate;		//每秒攻击频率
 	public int magazineSize;	//弹夹容量
-	public float reloadTime;	//填装时间
 	public int maxAmmo;			//子弹总数
-	public float critChance;	//暴击率
-	public float critMultiplier;//暴击倍率
+	public float reloadTime;	//填装时间
+
+	public float critChance = 0.05f;	//暴击率
+	public float critMultiplier = 2f;	//暴击倍率
+	public float statusChance = 0.1f;	//触发几率
+	
+	//攻击面板
+	public List<DamageData> damages = new List<DamageData>();	
 
 	private int curMagazine;
 	private int curAmmo;
@@ -21,7 +30,7 @@ public class RangedWeapon : Weapon {
 	private int fireIndex;
 	
 	void Awake(){
-		onceAttactTime = 1/attackRate;
+		onceAttactTime = 1/fireRate;
 		fireIndex = 0;
 		Transform[] children = transform.GetComponentsInChildren<Transform>();
 		foreach(Transform child in children){
@@ -31,6 +40,7 @@ public class RangedWeapon : Weapon {
 		}
 		curMagazine = magazineSize;
 		curAmmo = maxAmmo;
+
 	}
 	
 	void FixedUpdate(){
@@ -54,14 +64,14 @@ public class RangedWeapon : Weapon {
 	
 	override public void Attack(object[] message){
 		if(canAttact){
-			float attack = (float)message[0] * attackFix;
+			float attack = (float)message[0];
 			if(Random.Range(0,1) < critChance){
 				attack *= critMultiplier;
 			}
 			Vector3 target = (Vector3)message[1];
 			bool isPlayer = (bool)message[2];
 
-			GunController.instance.CreateOneBullet(firePoint[fireIndex],bullet,attack,attackRange,accurate,target,isPlayer);
+			GunController.instance.CreateOneBullet(target,firePoint[fireIndex],bullet,damages,attackRange,accurate,isPlayer);
 			canAttact = false;
 
 			if(--curMagazine == 0){

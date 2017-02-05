@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour {
 	
-	public int enemyNumber;
-	public string[] enemyName = new string[10];
-	public float[] enemyRate = new float[10];
-	public float interval;
-	public float stopSpawnDistance;
+	public int enemyNumber;							//总共能产生的敌人数量
+	public GameObject[] enemy = new GameObject[10];
+	public float[] enemyRate = new float[10];		//生成敌人的几率
+	public float interval;							//生成敌人的间隔
+	public float stopSpawnDistance;					//靠近一段距离后就不生产了
 	public bool isSpawning;
 
 	private float timer;
@@ -42,13 +42,16 @@ public class Spawner : MonoBehaviour {
 			weight -= enemyRate[num];
 			if(weight <= 0){
 				anim.SetBool("IsOpen",true);
-				yield return new WaitForSeconds(1.0f);
-				GameObject enemy = Instantiate(Resources.Load("Enemy/" + enemyName[num]),transform.position,transform.rotation) as GameObject;
-				enemy.GetComponent<Enemy>().target = transform.position + new Vector3(Random.Range(-10,10),0,0);
-				enemy.GetComponent<Enemy>().Died += delegate {
+				yield return new WaitForSeconds(interval/2);
+				//GameObject enemy = Instantiate(Resources.Load("Enemy/" + enemyName[num]),transform.position,transform.rotation) as GameObject;
+				GameObject newEnemy = ObjectPoolMgr.instance.Alloc(enemy[num]);
+				newEnemy.transform.position = this.transform.position;
+				newEnemy.GetComponent<Enemy>().target = transform.position + new Vector3(Random.Range(-10,10),0,0);
+				newEnemy.GetComponent<Enemy>().Died += delegate {
 					curNum--;
 				};
 				curNum++;
+				yield return new WaitForSeconds(interval/2);
 				anim.SetBool("IsOpen",false);
 				break;
 			}
