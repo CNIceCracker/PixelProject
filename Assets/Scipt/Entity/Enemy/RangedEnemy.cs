@@ -9,6 +9,8 @@ public class RangedEnemy : Enemy {
 	private Animator anim;
 	private Rigidbody2D rg;
 	private bool isDead = false;
+    
+    //public RangedEnemy():base(){}
 
 	void Awake(){
 		weapons = new List<Weapon>(GetComponentsInChildren<Weapon>());

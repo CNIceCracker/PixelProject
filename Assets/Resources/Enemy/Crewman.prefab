@@ -220,14 +220,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1044c291673d2a4a9b94419e684422a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackFix: .75
-  attackRate: 2
+  attackFix: .0500000007
+  attackRate: 10
   attackRange: 30
-  bullet: {fileID: 120066, guid: 70a700bbfb0f0144cafb5976ba0c8162, type: 2}
+  bullet: {fileID: 154918, guid: ffcae0a33c43f7c4b96730bcd342ebbd, type: 2}
   accurate: 100
-  magazineSize: 6
-  reloadTime: 1
-  maxAmmo: 0
+  magazineSize: 60
+  reloadTime: 2
+  maxAmmo: 9999
   critChance: 0
   critMultiplier: 0
 --- !u!114 &11485834
@@ -243,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   armor: 0
+  damageText: {fileID: 104074, guid: d9ba36dbcf085cd458c470e78d8d6c5c, type: 2}
   attack: 10
   weapons: []
   weaponIndex: 0
