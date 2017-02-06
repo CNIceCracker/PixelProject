@@ -15,20 +15,22 @@ public class ShowHP : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		ShowHPS();
+		if(GOslider != null){
+			ShowHPS();
+		}
 	}
 
-	void PrepareHPS(){
+	public void PrepareHPS(){
 		GOslider = Instantiate(HpSlider) as GameObject;		//生成血条
 		GOslider.transform.SetParent(GameObject.Find("Canvas").transform);	//将其置于Canvas下
 		GOslider.transform.localScale = new Vector3(0.2f,0.4f,1f);		//设置初始尺寸
 		slider = GOslider.GetComponent<Slider>();
-		slider.maxValue = GetComponent<Fightable>().health;
+		slider.maxValue = GetComponent<Fightable>().maxHealth;
 		ModelHeight = transform.localScale.y * GetComponent<BoxCollider2D>().bounds.size.y;
 	}
 
 	void ShowHPS(){
-		float currentHealth = GetComponent<Fightable>().health;
+		float currentHealth = GetComponent<Fightable>().GetHealth();
 		if(currentHealth >0){
 			slider.value = currentHealth;
 			//得到头顶在世界中的坐标

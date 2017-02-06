@@ -24,7 +24,9 @@ public class Bullet : Damage {
 		Hurtable target;
 		if((target = other.gameObject.GetComponent<Hurtable>()) != null){
 			target.BeAttacked(damages);
+			AddBuff(other.gameObject);
 		}
+
 		ObjectPoolMgr.instance.Recycle(this.gameObject);
 	}
 

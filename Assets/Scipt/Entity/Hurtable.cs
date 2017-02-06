@@ -4,20 +4,33 @@ using System.Collections.Generic;
 
 public class Hurtable : MonoBehaviour {
 
-	public float health;
+	public float maxHealth;
 	public float armor = 0;
 	public GameObject damageText;
 
+	[SerializeField]
+	private float curHealth;
+
+	void Awake(){
+		RecoverHealth();
+	}
+
 
 	public void BeAttacked(List<DamageData> damages){
-		float damageReduction = armor/(300f+armor);
-		float realDamage = Calculator.GetDamage(damages,damageReduction);
-		health -= realDamage;
+		float realDamage = Calculator.GetDamage(damages,armor);
+		curHealth -= realDamage;
 
-		if(health < 0) health = 0;
+		if(curHealth < 0) curHealth = 0;
         
         GameObject mObject = Instantiate(damageText, transform.position, Quaternion.identity) as GameObject;
         mObject.GetComponent<DamageText>().value =(int)realDamage;
 	}
-	
+
+	public void RecoverHealth(){
+		curHealth = maxHealth;
+	}
+
+	public float GetHealth(){
+		return curHealth;
+	}
 }

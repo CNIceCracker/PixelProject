@@ -61,7 +61,7 @@ public class ObjectPool : MonoBehaviour {
 			return;
 		}
 		queue.Enqueue(obj);//入队，并进行reset
-		obj.transform.parent = this.transform;
+		obj.transform.SetParent(this.transform);
 		obj.transform.position = Vector3.zero;
 		obj.SetActive(false);
 		_freeObjCount++;
