@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class Fightable : Hurtable {
 
-	public float attack;
-
 	public List<Weapon> weapons = null;
 	public int weaponIndex = 0;
+
+	private float attackFix = 1f;
 
 	void Awake(){
 		weapons = new List<Weapon>(GetComponentsInChildren<Weapon>());
@@ -16,7 +16,7 @@ public class Fightable : Hurtable {
 
 	public void Attack(object[] message){
 		object[] newMessage = new object[3];
-		newMessage[0] = attack;
+		newMessage[0] = attackFix;
 		newMessage[1] = message[0];
 		newMessage[2] = message[1];
 		weapons[weaponIndex].Attack(newMessage);

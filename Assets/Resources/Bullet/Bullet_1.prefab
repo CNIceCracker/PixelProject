@@ -24,7 +24,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: .0200533886, w: .999798894}
   m_LocalPosition: {x: -4.0999999, y: 13.1999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -55,11 +55,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damages: []
-  isPlayerAttack: 0
   buffs: []
+  isPlayerAttack: 0
+  attackFix: 0
   speed: 40
   range: 30
-  targetWay: {x: 0, y: 0}
+  targetWay: {x: .999195755, y: .0400987044}
 --- !u!212 &21208412
 SpriteRenderer:
   m_ObjectHideFlags: 1
