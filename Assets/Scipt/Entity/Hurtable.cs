@@ -16,8 +16,9 @@ public class Hurtable : MonoBehaviour {
 	}
 
 
-	public void BeAttacked(List<DamageData> damages){
+	public void BeAttacked(List<DamageData> damages,float fix = 1f){
 		float realDamage = Calculator.GetDamage(damages,armor);
+		realDamage *= fix;
 		curHealth -= realDamage;
 
 		if(curHealth < 0) curHealth = 0;

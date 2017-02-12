@@ -62,16 +62,43 @@ public class RangedWeapon : Weapon {
 	
 	override public void Attack(object[] message){
 		if(canAttact){
-			float attack = (float)message[0];
-			if(Random.Range(0,1) < critChance){
-				attack *= critMultiplier;
+			float attackFix = (float)message[0];
+			if(Random.Range(0f,1f) < critChance){
+				attackFix *= critMultiplier;
 			}
 			Vector3 target = (Vector3)message[1];
 			bool isPlayer = (bool)message[2];
 
-			GunController.instance.CreateOneBullet(target,firePoint[fireIndex],bullet,damages,statusChance,attackRange,accurate,isPlayer);
-			canAttact = false;
+			GameObject bulletObj = ObjectPoolMgr.instance.Alloc(bullet);
+			bulletObj.transform.position = firePoint[fireIndex].position;
+			Bullet bulletComp = bulletObj.GetComponent<Bullet>();
+			bulletComp.damages = damages;
+			bulletComp.range = attackRange;
+			bulletComp.isPlayerAttack = isPlayer;
+			bulletComp.attackFix = attackFix;
 
+			List<GameObject> buffs;
+			if(statusChance > 0){
+				buffs = new List<GameObject>();
+				foreach(DamageData data in damages){
+					if(Random.Range(0f,1f) <= statusChance){
+						GameObject buff = ObjectPoolMgr.instance.Alloc(data.status.ToString()+ "Buff");
+						buff.transform.SetParent(bulletObj.transform);
+						if(buff != null){
+							Calculator.SetBuffInfo(bulletObj,ref buff);
+							buffs.Add(buff);
+						}
+					}
+				}
+			}else{
+				buffs = null;
+			}
+			bulletComp.buffs = buffs;
+
+			GunController.instance.ChangeBulletWay(target,bulletObj,accurate);
+
+			//计算弹药消耗,更新冷却时间
+			canAttact = false;
 			if(--curMagazine == 0){
 				attactTimer = reloadTime;
 				if(curAmmo >= magazineSize){

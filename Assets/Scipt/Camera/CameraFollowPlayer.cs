@@ -5,7 +5,7 @@ public class CameraFollowPlayer : MonoBehaviour {
 	public float smoothing;
 	public Transform target;
 
-	Vector3 move;
+	Vector3 moveTarget;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,10 +14,16 @@ public class CameraFollowPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(!PlayerController.instance.isDead){
-			move = target.position;
-			move.y += 5f;
-			move.z = transform.position.z;
-			transform.position = Vector3.Lerp(transform.position, move , Time.deltaTime * smoothing);
+			moveTarget = target.position;
+			moveTarget.y += 4f;
+			moveTarget.z = transform.position.z;
+			if(PlayerController.instance.player.transform.localScale.x > 0){
+				moveTarget.x += 8f;
+			}else{
+				moveTarget.x -= 8f;
+			}
+
+			transform.position = Vector3.Lerp(transform.position, moveTarget , Time.deltaTime * smoothing);
 		}
 	}
 }

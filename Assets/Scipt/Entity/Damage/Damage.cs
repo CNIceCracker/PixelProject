@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class Damage : MonoBehaviour {
 	public List<DamageData> damages;
-	public bool isPlayerAttack;
 	public List<GameObject> buffs;
+	public bool isPlayerAttack;
+	public float attackFix;
 
 	public void AddBuff(GameObject target){
 

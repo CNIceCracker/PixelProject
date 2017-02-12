@@ -66,20 +66,22 @@ public class PlayerController : MonoBehaviour {
 
 	List<Command> GetInput(){
 		List<Command> myCommand = new List<Command>();
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(Input.GetKeyDown(KeyCode.K)){
 			myCommand.Add(new JumpCommand());
 		}
-		if(Input.GetMouseButton(0)){
-			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			if((mousePos.x - player.transform.position.x < 0 && player.transform.localScale.x == -1) ||
-			   mousePos.x - player.transform.position.x > 0 && player.transform.localScale.x == 1){
-				mousePos.z = 0;
-				object[] message = new object[2];
-				message[0] = mousePos;
-				message[1] = true;
-				
-				myCommand.Add(new AttackCommand(message));
+		if(Input.GetKey(KeyCode.J)){
+			Vector3 target = new Vector3(player.transform.position.x,player.transform.position.y,0);
+			if(player.transform.localScale.x > 0){
+				target.x += 100f;
+			}else{
+				target.x -= 100f;
 			}
+
+			object[] message = new object[2];
+			message[0] = target;
+			message[1] = true;
+
+			myCommand.Add(new AttackCommand(message));
 		}
 		if(Input.GetKeyDown(KeyCode.F)){
 			myCommand.Add(new SwitchNextWeaponCommand());
@@ -109,7 +111,7 @@ public class PlayerController : MonoBehaviour {
 			anim.SetBool("IsMove",false);
 		}
 		
-		if(Input.GetMouseButton(0) || Input.GetMouseButton (1)){
+		if(Input.GetKey(KeyCode.J)){
 			anim.SetBool("IsAim",true);
 		}else{
 			anim.SetBool("IsAim",false);
