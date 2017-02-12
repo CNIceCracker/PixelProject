@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,7 +8,7 @@ public class RangedEnemy : Enemy {
 	private float distance;
 	private Animator anim;
 	private Rigidbody2D rg;
-	private bool isDead = false;
+
     
     //public RangedEnemy():base(){}
 
@@ -17,6 +17,7 @@ public class RangedEnemy : Enemy {
 		weapons[0].gameObject.SetActive(true);
 		anim = GetComponent<Animator>();
 		rg = GetComponent<Rigidbody2D>();
+		RecoverHealth();
 	}
 
 	void FixedUpdate () {
@@ -28,8 +29,7 @@ public class RangedEnemy : Enemy {
 			command.Execute(gameObject);
 		}
 
-		if(health <= 0 && isDead == false){
-			isDead = true;
+		if(GetHealth() <= 0 && isDead == false){
 			StartCoroutine(DieNow());
 		}
 	}

@@ -16,10 +16,9 @@ public class GunController : MonoBehaviour{
 	}
 
 	public void CreateOneBullet(Vector3 target,Transform firePoint,GameObject bullet,List<DamageData> damages,
-	                            float attackRange,float accurate,bool isPlayer){
+	                            float statusChance, float attackRange,float accurate,bool isPlayer){
 		//GameObject bulletObj = Instantiate(bullet,firePoint.position,firePoint.rotation) as GameObject;
 		GameObject bulletObj = ObjectPoolMgr.instance.Alloc(bullet);
-		bulletObj.transform.SetParent(null);
 		bulletObj.transform.position = firePoint.position;
 		Bullet bulletComp = bulletObj.GetComponent<Bullet>();
 		bulletComp.damages = damages;
@@ -34,5 +33,24 @@ public class GunController : MonoBehaviour{
 		//设置物体的自身欧拉角，是物体绕自身坐标系在Z轴，旋转Z度。
 		bulletObj.transform.localEulerAngles=new Vector3(0,0,angle);
 
+
+		List<GameObject> buffs;
+		if(statusChance > 0){
+			buffs = new List<GameObject>();
+			foreach(DamageData data in damages){
+				if(Random.Range(0f,1f) <= statusChance){
+					GameObject buff = ObjectPoolMgr.instance.Alloc(data.status.ToString()+ "Buff");
+					buff.transform.SetParent(bulletObj.transform);
+					if(buff != null){
+						Calculator.SetBuffInfo(bulletObj,ref buff);
+						buffs.Add(buff);
+					}
+				}
+			}
+		}else{
+			buffs = null;
+		}
+
+		bulletComp.buffs = buffs;
 	}
 }

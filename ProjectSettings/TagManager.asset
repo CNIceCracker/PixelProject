@@ -15,6 +15,7 @@ TagManager:
   - TargetPoint
   - Damage
   - WeaponPoint
+  - Buff
   layers:
   - Default
   - TransparentFX

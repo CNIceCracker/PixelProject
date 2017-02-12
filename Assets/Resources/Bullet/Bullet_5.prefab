@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11410262}
   m_Layer: 0
   m_Name: Bullet_5
-  m_TagString: Untagged
+  m_TagString: Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,8 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e360b076fc10d4ea46fbefe655d317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 0
+  damages: []
   isPlayerAttack: 0
+  buffs: []
   speed: 60
   range: 30
   targetWay: {x: 0, y: 0}
@@ -93,7 +94,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Damage
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 154918}

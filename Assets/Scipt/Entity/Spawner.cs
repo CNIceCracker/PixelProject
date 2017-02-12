@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Spawner : MonoBehaviour {
 	
@@ -37,7 +38,7 @@ public class Spawner : MonoBehaviour {
 	}
 
 	private IEnumerator CreateEnemy(){
-		float weight = Random.Range(0f,1f);
+		float weight = UnityEngine.Random.Range(0f,1f);
 		for(int num = 0;num < enemyRate.Length;num++){
 			weight -= enemyRate[num];
 			if(weight <= 0){
@@ -46,16 +47,17 @@ public class Spawner : MonoBehaviour {
 				//GameObject enemy = Instantiate(Resources.Load("Enemy/" + enemyName[num]),transform.position,transform.rotation) as GameObject;
 				GameObject newEnemy = ObjectPoolMgr.instance.Alloc(enemy[num]);
 				newEnemy.transform.position = this.transform.position;
-				newEnemy.GetComponent<Enemy>().target = transform.position + new Vector3(Random.Range(-10,10),0,0);
-				newEnemy.GetComponent<Enemy>().Died += delegate {
-					curNum--;
-				};
+				newEnemy.GetComponent<Enemy>().target = transform.position + new Vector3(UnityEngine.Random.Range(-10,10),0,0);
+				newEnemy.GetComponent<Enemy>().Died += childDie;
 				curNum++;
-				yield return new WaitForSeconds(interval/2);
 				anim.SetBool("IsOpen",false);
 				break;
 			}
 		}
+	}
+
+	private void childDie(object o,EventArgs e){
+		curNum--;
 	}
 
 }

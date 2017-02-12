@@ -13,7 +13,7 @@ GameObject:
   - 61: {fileID: 6159170}
   m_Layer: 0
   m_Name: Bullet_1
-  m_TagString: Untagged
+  m_TagString: Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,8 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e360b076fc10d4ea46fbefe655d317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 0
+  damages: []
   isPlayerAttack: 0
+  buffs: []
   speed: 40
   range: 30
   targetWay: {x: 0, y: 0}
@@ -113,6 +114,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: range
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Damage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

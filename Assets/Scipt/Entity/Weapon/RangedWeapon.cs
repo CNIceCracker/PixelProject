@@ -3,15 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class RangedWeapon : Weapon {
-	
-
 	public float attackRange;	//攻击距离
 
 	public GameObject bullet; 	//发射的子弹
 	public float accurate;		//精准性
 	public float fireRate;		//每秒攻击频率
 	public int magazineSize;	//弹夹容量
-	public int maxAmmo;			//子弹总数
+	public int maxAmmo;			//子弹上限
 	public float reloadTime;	//填装时间
 
 	public float critChance = 0.05f;	//暴击率
@@ -71,7 +69,7 @@ public class RangedWeapon : Weapon {
 			Vector3 target = (Vector3)message[1];
 			bool isPlayer = (bool)message[2];
 
-			GunController.instance.CreateOneBullet(target,firePoint[fireIndex],bullet,damages,attackRange,accurate,isPlayer);
+			GunController.instance.CreateOneBullet(target,firePoint[fireIndex],bullet,damages,statusChance,attackRange,accurate,isPlayer);
 			canAttact = false;
 
 			if(--curMagazine == 0){
@@ -91,5 +89,11 @@ public class RangedWeapon : Weapon {
 				fireIndex = 0;
 			}
 		}
-	}
+	}//End of Attack()
+
+    public void GetAmmoInfo( ref int curAmmo,ref int curMagazine)
+    {
+        curAmmo = this.curAmmo;
+        curMagazine = this.curMagazine;
+    }   
 }
