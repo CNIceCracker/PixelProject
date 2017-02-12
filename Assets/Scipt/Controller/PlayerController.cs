@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 
 		if(player != null || (player = GameObject.FindGameObjectWithTag("Player")) != null){
+			player.GetComponent<Hurtable>().RecoverHealth();
 			Transform[] allChildren = player.GetComponentsInChildren<Transform>();
 			foreach(Transform child in allChildren){
 				if(child.tag == "WeaponPoint"){

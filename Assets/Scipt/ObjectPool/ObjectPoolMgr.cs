@@ -33,26 +33,7 @@ public class ObjectPoolMgr : MonoBehaviour {
 
 	protected void _init(){
 		foreach(AllocSize pool in objectPoolList){
-			string poolNameString = pool.prefeb.name + "Pool";
-			//生成type类型对象池的GameObject,它挂在ObjectPoolMgr层次下
-			GameObject subPool = new GameObject(poolNameString);
-			subPool.transform.parent = this.transform;
-			//根据poolNameString 找到对应的对象池类,并添加到对象池GameObject上
-			ObjectPool newPool;
-			System.Type poolType = System.Type.GetType(poolNameString);
-			if(poolType != null){
-				newPool = (ObjectPool)subPool.AddComponent(poolType);
-			}else{
-				//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
-				newPool = subPool.AddComponent<CommonPool>() as ObjectPool;
-			}
-			//传一些参数到新创建的对象池中
-			newPool.objTypeString = pool.prefeb.name;
-			newPool.prefab = pool.prefeb;
-			newPool.preAllocCount = pool.preAllocSize;
-			newPool.autoIncreaseCount = pool.autoIncreaseSize;
-			newPool.Alloc(-1);
-			poolDic.Add(poolNameString,newPool);
+			CreatePool(pool.prefeb.name,pool.prefeb,pool.preAllocSize,pool.autoIncreaseSize);
 		}
 	}
 
@@ -69,8 +50,21 @@ public class ObjectPoolMgr : MonoBehaviour {
 		if(poolType != null){
 			subPool = (ObjectPool)newPool.AddComponent(poolType);
 		}else{
-			//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
-			subPool = newPool.AddComponent<CommonPool>() as ObjectPool;
+			switch(prefab.tag){
+			case "Enemy" :
+				subPool = newPool.AddComponent<EnemyPool>() as ObjectPool;
+				break;
+			case "Buff":
+				subPool = newPool.AddComponent<BuffPool>() as ObjectPool;
+				break;
+			case "Damage":
+				subPool = newPool.AddComponent<DamagePool>() as ObjectPool;
+				break;
+			default:
+				//如果没有为此对象池实现一个类,那么挂载一个带有通用alloc和recycle方法的脚本
+				subPool = newPool.AddComponent<CommonPool>() as ObjectPool;
+				break;
+			}
 		}
 
 		//传一些参数到新创建的对象池中
@@ -90,7 +84,8 @@ public class ObjectPoolMgr : MonoBehaviour {
 		string poolNameString = type + "Pool"; //拼出对象池名字
 		
 		if(!poolDic.TryGetValue(poolNameString,out subPool)){ //如果字典中没有这样的对象池,则报错
-			Debug.LogWarning("Cannot find pool" + type);
+			Debug.LogWarning("Cannot find pool : " + poolNameString);
+			return null;
 		}
 		//从对象池中取一个对象返回
 		GameObject returnObj = subPool.Alloc(lifetime);

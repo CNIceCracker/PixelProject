@@ -69,7 +69,7 @@ public class RangedWeapon : Weapon {
 			Vector3 target = (Vector3)message[1];
 			bool isPlayer = (bool)message[2];
 
-			GunController.instance.CreateOneBullet(target,firePoint[fireIndex],bullet,damages,attackRange,accurate,isPlayer);
+			GunController.instance.CreateOneBullet(target,firePoint[fireIndex],bullet,damages,statusChance,attackRange,accurate,isPlayer);
 			canAttact = false;
 
 			if(--curMagazine == 0){
@@ -89,12 +89,11 @@ public class RangedWeapon : Weapon {
 				fireIndex = 0;
 			}
 		}
-	}
+	}//End of Attack()
 
     public void GetAmmoInfo( ref int curAmmo,ref int curMagazine)
     {
         curAmmo = this.curAmmo;
         curMagazine = this.curMagazine;
     }
-    
 }
