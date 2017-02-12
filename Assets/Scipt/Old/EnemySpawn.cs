@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 
 public class EnemySpawn : MonoBehaviour {
@@ -34,4 +34,4 @@ public class EnemySpawn : MonoBehaviour {
 	private void CreateEnemy(){
 		Instantiate(Resources.Load("Enemy/" + enemyName),transform.position,transform.rotation);
 	}
-}
+}*/

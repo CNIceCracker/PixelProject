@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 
 public class TestGun : MonoBehaviour {
@@ -36,5 +36,6 @@ public class TestGun : MonoBehaviour {
 			attactTimer = 0f;
 		}
 
-	}*/
+	}
 }
+*/

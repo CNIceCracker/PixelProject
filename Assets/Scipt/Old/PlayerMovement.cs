@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
@@ -56,5 +56,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnDestroy(){
 		PlayerController.instance.isDead = true;
-	}*/
+	}
 }
+*/

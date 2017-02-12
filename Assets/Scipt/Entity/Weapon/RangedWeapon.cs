@@ -118,9 +118,8 @@ public class RangedWeapon : Weapon {
 		}
 	}//End of Attack()
 
-    public void GetAmmoInfo( ref int curAmmo,ref int curMagazine)
+    override public string GetAmmoInfo()
     {
-        curAmmo = this.curAmmo;
-        curMagazine = this.curMagazine;
-    }   
+		return curMagazine.ToString()+"/"+curAmmo.ToString();
+    }
 }

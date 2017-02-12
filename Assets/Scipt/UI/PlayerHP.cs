@@ -3,25 +3,27 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour {
+	public Text HPText;
 
-    public Slider HPSlider;
-    public float maxHP;
-    public float curHP;
-    public GameObject player;
-	// Use this for initialization
+    private float maxHP;
+    private float curHP;
+
+	private Slider HPSlider;
+	private Fightable fightable;
+
     void Awake()
     {
-        curHP = maxHP = player.GetComponent<Fightable>().maxHealth;
-        HPSlider.value = HPSlider.maxValue = maxHP;
+		fightable = PlayerController.instance.player.GetComponent<Fightable>();
+		HPSlider = GetComponent<Slider>();
+		maxHP = fightable.maxHealth;
+		HPSlider.maxValue = maxHP;
+		curHP = maxHP;
     }
-	void Start () {
-       
-	}
-	
-	// Update is called once per frame
+
 	void Update () {
-        curHP = player.GetComponent<Fightable>().GetHealth();
+		curHP = fightable.GetHealth();
         HPSlider.value = curHP; 
+		HPText.text = ((int)curHP).ToString() + "/" + ((int)maxHP).ToString();
 	}
 
 }

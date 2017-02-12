@@ -1,6 +1,5 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
-
 
 public class EnemyMove: MonoBehaviour {
 	public float visualField; //视野范围
@@ -39,8 +38,5 @@ public class EnemyMove: MonoBehaviour {
 		}
 
 	}
-
-
-
-
 }
+ */
