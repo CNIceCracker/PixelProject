@@ -97,17 +97,17 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void AnimatorSet(){
-		horizontal = Input.GetAxis("Horizontal");
 
-		if(horizontal != 0){
-			if(horizontal < 0){
-				player.transform.localScale = new Vector3(-1,1,1);
-			}
-			else{
-				player.transform.localScale = new Vector3(1,1,1);
-			}
+		if(Input.GetKey(KeyCode.A)){
+			horizontal = -1;
+			player.transform.localScale = new Vector3(-1,1,1);
+			anim.SetBool("IsMove",true);
+		}else if(Input.GetKey(KeyCode.D)){
+			horizontal = 1;
+			player.transform.localScale = new Vector3(1,1,1);
 			anim.SetBool("IsMove",true);
 		}else{
+			horizontal = 0;
 			anim.SetBool("IsMove",false);
 		}
 		

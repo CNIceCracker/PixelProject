@@ -14,6 +14,9 @@ public class PlayerAmmo : MonoBehaviour {
     }
 
 	void Update () {
-		ammoText.text = wp.GetAmmoInfo();
+		if(wp != null){
+			ammoText.text = wp.GetAmmoInfo();
+		}
+
 	}
 }
