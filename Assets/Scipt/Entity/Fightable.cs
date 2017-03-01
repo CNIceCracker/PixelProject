@@ -8,6 +8,7 @@ public class Fightable : Hurtable {
 	public int weaponIndex = 0;
 
 	private float attackFix = 1f;
+	private List<Buff> buffs = new List<Buff>();
 
 	void Awake(){
 		weapons = new List<Weapon>(GetComponentsInChildren<Weapon>());
@@ -39,5 +40,33 @@ public class Fightable : Hurtable {
 	
 	private void UnloadWeapon(Weapon weapon){
 		weapon.gameObject.SetActive(false);
+	}
+
+	public Buff GetFirstBuffByType(int Type){
+		foreach(Buff buff in buffs){
+			if(buff.buffType == Type){
+				return buff;
+			}
+		}
+		return null;
+	}
+
+	public bool AttachBuff(Buff buff){
+		Buff old = GetFirstBuffByType(buff.buffType);
+		if(old != null && old.buffLevel > buff.buffLevel){
+			return false;
+		}
+		buffs.Add(buff);
+		return true;
+	}
+
+	public bool DetachBuff(Buff buff){
+		return buffs.Remove(buff);
+	}
+
+	void FixedUpdate(){
+		foreach(Buff buff in buffs){
+			buff.OnTick();
+		}
 	}
 }

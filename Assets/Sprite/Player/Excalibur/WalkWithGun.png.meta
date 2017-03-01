@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 73d9d68233d1574458cbb760c48e2df8
-timeCreated: 1486980182
+guid: b48e8f914340a4f4a9fcc41a2489b4db
+timeCreated: 1487086009
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,7 @@ TextureImporter:
     21300002: WalkWithGun_1
     21300004: WalkWithGun_2
     21300006: WalkWithGun_3
+    21300008: WalkWithGun_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,42 +58,52 @@ TextureImporter:
     - name: WalkWithGun_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 38
-        width: 14
+        x: 5
+        y: 3
+        width: 18
         height: 26
       alignment: 9
-      pivot: {x: .469999999, y: 0}
+      pivot: {x: .474000007, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: WalkWithGun_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 38
-        width: 14
+        x: 30
+        y: 3
+        width: 18
         height: 26
       alignment: 9
-      pivot: {x: .474999994, y: 0}
+      pivot: {x: .472499996, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: WalkWithGun_2
       rect:
         serializedVersion: 2
-        x: 8
-        y: 5
-        width: 14
+        x: 58
+        y: 3
+        width: 16
         height: 26
       alignment: 9
-      pivot: {x: .469999999, y: 0}
+      pivot: {x: .409999996, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: WalkWithGun_3
       rect:
         serializedVersion: 2
-        x: 38
-        y: 5
-        width: 14
+        x: 82
+        y: 3
+        width: 15
         height: 26
       alignment: 9
-      pivot: {x: .474999994, y: 0}
+      pivot: {x: .368000001, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: WalkWithGun_4
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 3
+        width: 13
+        height: 26
+      alignment: 9
+      pivot: {x: .425000012, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

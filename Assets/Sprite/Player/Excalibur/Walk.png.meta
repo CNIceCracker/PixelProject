@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a6846fc9fa0093745abb3820baa48f23
-timeCreated: 1486977556
+guid: 0a100fcc171623e4cab75f03faddefce
+timeCreated: 1487085841
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,7 @@ TextureImporter:
     21300002: Walk_1
     21300004: Walk_2
     21300006: Walk_3
+    21300008: Walk_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,37 +59,47 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 5
-        y: 38
-        width: 17
+        y: 3
+        width: 19
         height: 26
       alignment: 9
-      pivot: {x: .495000005, y: 0}
+      pivot: {x: .444999993, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Walk_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 38
-        width: 16
+        x: 31
+        y: 3
+        width: 15
         height: 26
       alignment: 9
-      pivot: {x: .527999997, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Walk_2
       rect:
         serializedVersion: 2
-        x: 8
-        y: 5
+        x: 58
+        y: 3
         width: 14
         height: 26
       alignment: 9
-      pivot: {x: .455000013, y: 0}
+      pivot: {x: .460000008, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Walk_3
       rect:
         serializedVersion: 2
-        x: 38
-        y: 5
+        x: 82
+        y: 3
+        width: 13
+        height: 26
+      alignment: 9
+      pivot: {x: .419999987, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walk_4
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 3
         width: 14
         height: 26
       alignment: 9

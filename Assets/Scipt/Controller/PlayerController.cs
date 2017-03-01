@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
 	public Transform playerWeaponPoint = null;
 
 	private Animator anim = null;
-	private float horizontal;
+	//private float horizontal;
 
 	private Rigidbody2D rg;
 	
@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour {
 		}
 		if(Input.GetKeyDown(KeyCode.LeftShift)){
 			player.GetComponent<CharacterMove>().moveEfficiency *= 2f;
-
 		}
 		if(Input.GetKeyUp(KeyCode.LeftShift)){
 			player.GetComponent<CharacterMove>().moveEfficiency /= 2f;
@@ -58,10 +57,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-
 		AnimatorSet();
 		rg.WakeUp();
-
 	}
 
 	List<Command> GetInput(){
@@ -98,44 +95,27 @@ public class PlayerController : MonoBehaviour {
 
 	private void AnimatorSet(){
 
-		if(Input.GetKey(KeyCode.A)){
-			horizontal = -1;
-			player.transform.localScale = new Vector3(-1,1,1);
-			anim.SetBool("IsMove",true);
-		}else if(Input.GetKey(KeyCode.D)){
-			horizontal = 1;
-			player.transform.localScale = new Vector3(1,1,1);
-			anim.SetBool("IsMove",true);
-		}else{
-			horizontal = 0;
-			anim.SetBool("IsMove",false);
-		}
-		
-		if(Input.GetKey(KeyCode.J)){
-			anim.SetBool("IsAim",true);
-		}else{
-			anim.SetBool("IsAim",false);
-		}
-
-		if(Input.GetKey(KeyCode.LeftControl) && horizontal == 0){
-			anim.SetBool("IsSquat",true);
-		}else{
-			anim.SetBool("IsSquat",false);
-		}
-		
 		if(playerWeaponPoint.childCount != 0){
 			anim.SetBool("HaveWeapon",true);
 		}else{
 			anim.SetBool("HaveWeapon",false);
 		}
 
-		if(Input.GetKeyDown(KeyCode.LeftShift)){
-			player.GetComponent<Animator>().SetBool("IsRun",true);
-			
+		if(Input.GetKey(KeyCode.A)){
+			//horizontal = -1;
+			player.transform.localScale = new Vector3(-1,1,1);
+			anim.SetBool("IsMove",true);
+		}else if(Input.GetKey(KeyCode.D)){
+			//horizontal = 1;
+			player.transform.localScale = new Vector3(1,1,1);
+			anim.SetBool("IsMove",true);
+		}else{
+			//horizontal = 0;
+			anim.SetBool("IsMove",false);
 		}
-		if(Input.GetKeyUp(KeyCode.LeftShift) || !Input.GetKey(KeyCode.LeftShift)){
-			player.GetComponent<Animator>().SetBool("IsRun",false);
-		}
+
+		anim.speed = player.GetComponent<CharacterMove>().moveEfficiency;
+
 	}
 
 

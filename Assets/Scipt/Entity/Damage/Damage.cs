@@ -18,9 +18,13 @@ public class Damage : MonoBehaviour {
 		}
 
 		foreach(GameObject buff in buffs){
+			Buff buf = buff.GetComponent<Buff>();
+			if((buf.GetFixType() & BuffFixType.BeforeAttach) == BuffFixType.BeforeAttach){
+				buf.FixBeforeAttach();
+			}
 			buff.transform.SetParent(buffPoint);
 			buff.transform.localPosition = Vector3.zero;
-			buff.GetComponent<Buff>().StartUp();
+			buf.Occur();
 		}
 	}
 }

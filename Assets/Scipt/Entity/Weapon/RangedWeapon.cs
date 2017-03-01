@@ -84,8 +84,12 @@ public class RangedWeapon : Weapon {
 					if(Random.Range(0f,1f) <= statusChance){
 						GameObject buff = ObjectPoolMgr.instance.Alloc(data.status.ToString()+ "Buff");
 						buff.transform.SetParent(bulletObj.transform);
+						buff.transform.localPosition = Vector3.zero;
 						if(buff != null){
-							Calculator.SetBuffInfo(bulletObj,ref buff);
+							BuffFixType type = buff.GetComponent<Buff>().GetFixType();
+							if((type & BuffFixType.AfterCreate) == BuffFixType.AfterCreate){
+								buff.GetComponent<Buff>().FixAfterCreate();
+							}
 							buffs.Add(buff);
 						}
 					}

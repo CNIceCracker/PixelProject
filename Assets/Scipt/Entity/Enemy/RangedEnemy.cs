@@ -39,7 +39,7 @@ public class RangedEnemy : Enemy {
 			distance = (playerTrans.position - transform.position).magnitude;
 			
 			if(distance <= visualField  ){ 		//若与Player距离小于视野距离,则将目标改为Player，并准备攻击
-				target = playerTrans.position;
+				target = playerTrans.position + new Vector3(0,3,0);
 				
 				if(distance <= attackRange){
 					anim.SetBool("IsAim",true);
@@ -51,7 +51,7 @@ public class RangedEnemy : Enemy {
 						transform.localScale = new Vector3(1,1,1);
 					} 
 					object[] message = new object[2];
-					message[0] = playerTrans.position;
+					message[0] = target;
 					message[1] = false;
 					return new AttackCommand(message);
 				}

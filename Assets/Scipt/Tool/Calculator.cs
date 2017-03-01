@@ -57,6 +57,7 @@ public class Calculator{
 		}
 	}
 
+	/*
 	public static void SetBuffInfo(GameObject owner,ref GameObject buff){
 		switch(buff.name){
 		case "ImpactBuff(Clone)":
@@ -66,7 +67,7 @@ public class Calculator{
 			buff.GetComponent<SlashBuff>().lifeTime = 3;
 			break;
 		}
-	}
+	}*/
 
 	public static void clearEvent(ref EventHandler clearEvent)
 	{

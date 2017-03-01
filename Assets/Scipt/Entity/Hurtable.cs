@@ -27,6 +27,16 @@ public class Hurtable : MonoBehaviour {
         mObject.GetComponent<DamageText>().value =(int)realDamage;
 	}
 
+	public void BeAttacked(float value,float fix = 1f){
+		float realDamage = value * fix;
+		curHealth -= realDamage;
+
+		if(curHealth < 0) curHealth = 0;
+		
+		GameObject mObject = Instantiate(damageText, transform.position, Quaternion.identity) as GameObject;
+		mObject.GetComponent<DamageText>().value =(int)realDamage;
+	}
+
 	public void RecoverHealth(){
 		curHealth = maxHealth;
 	}

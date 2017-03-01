@@ -2,8 +2,7 @@
 using System.Collections;
 
 [System.Flags]
-public enum DamageStatusEffect
-{
+public enum DamageStatusEffect{
 	None   = 1 << 0,
 	Impact = 1 << 1,
 	Puncture = 1 << 2,
@@ -20,5 +19,9 @@ public enum DamageStatusEffect
 	Viral = (1 << 4)|(1 << 7)
 }
 
-
+[System.Flags]
+public enum BuffFixType{
+	AfterCreate = 1 << 0,
+	BeforeAttach = 1 << 1
+}
 
